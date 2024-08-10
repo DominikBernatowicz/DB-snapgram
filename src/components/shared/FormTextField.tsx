@@ -1,6 +1,6 @@
 import { FC } from "react"
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
-import { Input } from "./ui/input"
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
+import { Input } from "../ui/input"
 import { Control } from "react-hook-form"
 
 type FormTextFieldProps = {
@@ -25,7 +25,7 @@ const FormTextField: FC<FormTextFieldProps> = ({control, name, type='text', clas
           <FormDescription>
             {desription}
           </FormDescription>
-          <FormMessage className="text-orange-300"/>
+          <FormMessage className="shad-form_message"/>
         </FormItem>
       )}
     />
