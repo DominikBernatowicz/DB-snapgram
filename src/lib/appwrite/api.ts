@@ -118,7 +118,7 @@ export async function createPost(post: INewPost) {
         }
 
         // Convert tags in an array
-        const tags = post.tags?.replace(/ /g,'').split(',') || []
+        const tags = post.tags?.replace(/ /g,'').split(',').filter(tag => tag !== '') || []
 
         // Save post to database
         const newPost = await databases.createDocument(
