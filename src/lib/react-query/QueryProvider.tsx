@@ -3,10 +3,10 @@ import { ReactNode } from "react"
 
 const queryClient = new QueryClient()
 
-const QueryProvider = ({children}: {children: ReactNode}) => {
+const QueryProvider = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
-        {children}
+      {children}
     </QueryClientProvider>
   )
 }
