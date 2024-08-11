@@ -1,7 +1,8 @@
-import { INewPost, INewUser } from "@/types";
+import { INewPost, INewUser, IUpdatePost } from "@/types";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
 import { ID, ImageGravity, Query } from "appwrite";
 import { id } from "date-fns/locale";
+import { ifError } from "assert";
 
 export async function createUserAccount(user: INewUser) {
   try {
@@ -267,9 +268,76 @@ export async function getPostById(postId: string) {
       postId
     )
 
-    if(!post) throw Error
+    if (!post) throw Error
 
     return post
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export async function updatePost(post: IUpdatePost) {
+  const hasFileToUpdate = post.file.length > 0
+
+  try {
+    let image = {
+      imageUrl: post.imageUrl,
+      imageId: post.imageId
+    }
+
+    if (hasFileToUpdate) {
+      // Upload image to storage
+      const uploadedFile = await uploadFile(post.file[0])
+
+      if (!uploadedFile) throw Error
+
+      // Get URL
+      const fileUrl = await getFilePreview(uploadedFile.$id)
+
+      if (!fileUrl) {
+        deleteFile(uploadedFile.$id)
+        throw Error
+      }
+
+      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id }
+    }
+
+    // Convert tags in an array
+    const tags = post.tags?.replace(/ /g, '').split(',').filter(tag => tag !== '') || []
+
+    // Save post to database
+    const updatedPost = await databases.updateDocument(
+      appwriteConfig.databasesId,
+      appwriteConfig.postsCollectionId,
+      post.postId,
+      {
+        caption: post.caption,
+        imageUrl: image.imageUrl,
+        imageId: image.imageId,
+        location: post.location,
+        tags,
+      }
+    )
+
+    if (!updatedPost) throw Error
+
+    return updatedPost
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export async function deletePost(postId: string, imageId: string) {
+  if (!postId || !imageId) throw Error
+
+  try {
+    await databases.deleteDocument(
+      appwriteConfig.databasesId,
+      appwriteConfig.postsCollectionId,
+      postId
+    )
+
+    return { status: 'ok' }
   } catch (err) {
     console.log(err)
   }

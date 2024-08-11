@@ -18,17 +18,21 @@ import { Models } from "appwrite"
 import { useUserContext } from "@/context/AuthContext"
 import { useToast } from "../ui/use-toast"
 import { useNavigate } from "react-router-dom"
-import { useCreatePost } from "@/lib/react-query/queriesAndMutatuions"
+import { useCreatePost, useDeletePost, useUpdatePost } from "@/lib/react-query/queriesAndMutatuions"
 
 type PostFormProps = {
-  post?: Models.Document
+  post?: Models.Document,
+  action: 'Create' | 'Update'
 }
 
-const PostForm = ({ post }: PostFormProps) => {
+const PostForm = ({ post, action }: PostFormProps) => {
   const { toast } = useToast()
   const navigate = useNavigate()
   const { user } = useUserContext()
+
   const { mutateAsync: createPost, isPending: isLoadingCreate } = useCreatePost()
+  const { mutateAsync: updatePost, isPending: isLoadingUpdate } = useUpdatePost()
+  // const { mutateAsync: deletePost, isPending: isLoadingDelete } = useDeletePost()
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof PostValidationSchema>>({
@@ -43,16 +47,31 @@ const PostForm = ({ post }: PostFormProps) => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof PostValidationSchema>) {
-    const newPost = await createPost({
-      ...values,
-      userId: user.id
-    })
+    if (post && action === 'Update') {
+      const updatedPost = updatePost({
+        ...values,
+        postId: post?.$id,
+        imageId: post?.imageId,
+        imageUrl: post?.imageUrl
+      })
 
-    if (!newPost) toast({
-      title: 'Please try again'
-    })
+      if (!updatedPost) toast({
+        title: 'Please try again'
+      })
 
-    navigate('/')
+      navigate(`/post/${post?.$id}`)
+    } else {
+      const newPost = await createPost({
+        ...values,
+        userId: user.id
+      })
+
+      if (!newPost) toast({
+        title: 'Please try again'
+      })
+
+      navigate('/')
+    }
   }
 
   return (
@@ -126,14 +145,17 @@ const PostForm = ({ post }: PostFormProps) => {
           <Button
             type="button"
             className="shad-button_dark_4"
+            onClick={() => navigate('/')}
           >
             Cancel
           </Button>
           <Button
             type="submit"
             className="shad-button_primary whitespace-nowrap"
+            disabled={isLoadingCreate || isLoadingUpdate}
           >
-            Submit
+            {isLoadingCreate || isLoadingUpdate && 'Loading...'}
+            {action} Post
           </Button>
         </div>
       </form>
