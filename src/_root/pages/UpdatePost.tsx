@@ -7,7 +7,7 @@ const UpdatePost = () => {
   const { id } = useParams()
   const { data: post, isPending } = useGetPostById(id || '')
 
-  if(isPending) return <Loader />
+  if (isPending) return <Loader />
 
   return (
     <div className="flex flex-1">
@@ -22,7 +22,7 @@ const UpdatePost = () => {
           <h2 className="h3-bold md:h2-bold text-left w-full">Update post</h2>
         </div>
 
-        <PostForm action='Update' post={post}/>
+        <PostForm action='Update' post={post} />
       </div>
     </div>
   )

@@ -18,7 +18,7 @@ import { Models } from "appwrite"
 import { useUserContext } from "@/context/AuthContext"
 import { useToast } from "../ui/use-toast"
 import { useNavigate } from "react-router-dom"
-import { useCreatePost, useDeletePost, useUpdatePost } from "@/lib/react-query/queriesAndMutatuions"
+import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutatuions"
 
 type PostFormProps = {
   post?: Models.Document,
@@ -32,7 +32,6 @@ const PostForm = ({ post, action }: PostFormProps) => {
 
   const { mutateAsync: createPost, isPending: isLoadingCreate } = useCreatePost()
   const { mutateAsync: updatePost, isPending: isLoadingUpdate } = useUpdatePost()
-  // const { mutateAsync: deletePost, isPending: isLoadingDelete } = useDeletePost()
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof PostValidationSchema>>({
