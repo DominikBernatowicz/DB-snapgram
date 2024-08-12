@@ -21,9 +21,10 @@ const Topbar = () => {
           <img
             src='/assets/images/logo.svg'
             alt='logo'
-            width={130}
-            height={35}
+            width={45}
+            height={30}
           />
+          <h1 className='h3-bold'>Insta<span className='text-[#7091E6]'>V</span>ibe</h1>
         </Link>
         <div className='flex gap-4'>
           <Button

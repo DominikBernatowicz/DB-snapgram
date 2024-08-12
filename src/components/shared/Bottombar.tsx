@@ -11,10 +11,10 @@ const Bottombar = () => {
         const isActive = pathname === link.route
 
         return (
-          <Link 
-          to={link.route} 
-          key={index} 
-          className={`bottombar-link group ${isActive && 'bg-primary-500 rounded-[10px]'} flex-center flex-col gap-1 p-2 transition`}
+          <Link
+            to={link.route}
+            key={index}
+            className={`bottombar-link group ${isActive && 'bg-primary-500 rounded-[10px]'} flex-center flex-col gap-1 p-2 transition`}
           >
             <img
               src={link.imgURL}

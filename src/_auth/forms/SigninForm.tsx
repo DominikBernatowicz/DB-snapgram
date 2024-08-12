@@ -11,6 +11,7 @@ import Loader from "@/components/shared/Loader"
 import { useSignInAccount } from "@/lib/react-query/queriesAndMutatuions"
 import { useToast } from "@/components/ui/use-toast"
 import { useUserContext } from "@/context/AuthContext"
+import { useEffect } from "react"
 
 
 const SigninForm = () => {
@@ -55,10 +56,15 @@ const SigninForm = () => {
   return (
     <Form {...form}>
       <div className='sm:w-420 flex-center flex-col'>
-        <img
-          src="/assets/images/logo.svg"
-          alt="logo"
-        />
+        <div className="flex flex-center gap-2">
+          <img
+            src="/assets/images/logo.svg"
+            alt="logo"
+            height={70}
+            width={70}
+          />
+          <h1 className='h1-bold'>Insta<span className='text-[#7091E6]'>V</span>ibe</h1>
+        </div>
 
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">Sign in to your account</h2>
         <p className="text-light-3 small-medium md:base-regular mt-2">Welcome back! Please enter your details</p>

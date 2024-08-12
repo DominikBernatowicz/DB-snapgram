@@ -20,13 +20,14 @@ const LeftSidebar = () => {
   return (
     <nav className='leftsidebar'>
       <div className='flex flex-col gap-11'>
-        <Link to='/' className='flex gap-3 items-center'>
+        <Link to='/' className='flex gap-2 items-center'>
           <img
             src='/assets/images/logo.svg'
             alt='logo'
-            width={170}
-            height={36}
+            width={45}
+            height={30}
           />
+          <h1 className='h3-bold'>Insta<span className='text-[#7091E6]'>V</span>ibe</h1>
         </Link>
 
         <Link to={`/profile/${user.id}`} className='flex gap-3 items-center'>
