@@ -1,18 +1,32 @@
 import Loader from '@/components/shared/Loader'
 import PostStats from '@/components/shared/PostStats'
 import { Button } from '@/components/ui/button'
+import { useToast } from '@/components/ui/use-toast'
 import { useUserContext } from '@/context/AuthContext'
-import { useGetPostById } from '@/lib/react-query/queriesAndMutatuions'
+import { useDeletePost, useGetPostById } from '@/lib/react-query/queriesAndMutatuions'
 import { convertDate } from '@/lib/utils'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 const PostDetails = () => {
+  const navigate = useNavigate()
+  const { toast } = useToast()
   const { id } = useParams()
   const { data: post, isPending } = useGetPostById(id || '')
   const { user } = useUserContext()
 
-  const handleDeletePost = () => {
+  const { mutate: deletePost, isSuccess: isDeletePost, isPending: isDeleteLoading } = useDeletePost()
 
+  const handleDeletePost = () => {
+    deletePost({
+      postId: id || '',
+      imageId: post?.imageId
+    })
+
+    if (!isDeletePost) toast({
+      title: 'Please try again'
+    })
+    
+    navigate('/')
   }
 
   return (
@@ -67,18 +81,20 @@ const PostDetails = () => {
                 </Link>
 
 
-                <Button
+                {post?.creator.$id === user.id && <Button
                   onClick={handleDeletePost}
                   variant='ghost'
                   className="post_details-delete_btn"
                 >
-                  <img
-                    src="/assets/icons/delete.svg"
-                    width={24}
-                    height={24}
-                    alt="add"
-                  />
-                </Button>
+                  {isDeleteLoading ? <Loader />
+                    :
+                    <img
+                      src="/assets/icons/delete.svg"
+                      width={24}
+                      height={24}
+                      alt="add"
+                    />}
+                </Button>}
               </div>
             </div>
 
