@@ -3,6 +3,7 @@ import { Button } from '../ui/button'
 import { useSignOutAccount } from '@/lib/react-query/queriesAndMutatuions'
 import { useEffect } from 'react'
 import { useUserContext } from '@/context/AuthContext'
+import LogoComponent from './LogoComponent'
 
 const Topbar = () => {
   const navigate = useNavigate()
@@ -17,15 +18,8 @@ const Topbar = () => {
   return (
     <section className='topbar'>
       <div className='flex-between py-4 px-5'>
-        <Link to='/' className='flex gap-3 items-center'>
-          <img
-            src='/assets/images/logo.svg'
-            alt='logo'
-            width={45}
-            height={30}
-          />
-          <h1 className='h3-bold'>Insta<span className='text-[#7091E6]'>V</span>ibe</h1>
-        </Link>
+      <LogoComponent/>
+      
         <div className='flex gap-4'>
           <Button
             variant='ghost'

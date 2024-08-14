@@ -115,6 +115,10 @@
 
   /* All Users */
   .user-container {
+    @apply flex flex-col flex-1 items-center overflow-scroll py-10 px-5 md:p-14 custom-scrollbar
+  }
+
+  .user-iner_container {
     @apply max-w-5xl flex flex-col items-start w-full gap-6 md:gap-9;
   }
 
@@ -279,4 +283,80 @@
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
+}
+
+/* Logo */
+@keyframes wave {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.logo-wave h1 {
+  animation: wave 0.8s ease-in-out forwards;
+  display: inline-block;
+  opacity: 0;
+}
+
+.logo-wave .delay-0 {
+  animation-delay: 0s;
+}
+
+.logo-wave .delay-1 {
+  animation-delay: 0.1s;
+}
+
+.logo-wave .delay-2 {
+  animation-delay: 0.2s;
+}
+
+.logo-wave .delay-3 {
+  animation-delay: 0.3s;
+}
+
+.logo-wave .delay-4 {
+  animation-delay: 0.4s;
+}
+
+.logo-wave .delay-5 {
+  animation-delay: 0.5s;
+}
+
+.logo-wave .delay-6 {
+  animation-delay: 0.6s;
+}
+
+.logo-wave .delay-7 {
+  animation-delay: 0.7s;
+}
+
+.logo-wave .delay-8 {
+  animation-delay: 0.8s;
+}
+
+/* Animacja błysku dla litery "V" */
+@keyframes shine {
+  0% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow: 0 0 10px #7091E6, 0 0 20px #7091E6, 0 0 30px #7091E6;
+  }
+  100% {
+    text-shadow: none;
+  }
+}
+
+.shine {
+  animation: shine 1s ease-in-out forwards;
+  animation-delay: 1.6s; /* Dodaj opóźnienie, aby shine zadziałał po wave */
 }

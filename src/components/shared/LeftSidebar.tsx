@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useUserContext } from '@/context/AuthContext'
 import { sidebarLinks } from '@/constansts'
 import { INavLink } from '@/types'
+import LogoComponent from './LogoComponent'
 
 const LeftSidebar = () => {
   const navigate = useNavigate()
@@ -20,15 +21,7 @@ const LeftSidebar = () => {
   return (
     <nav className='leftsidebar'>
       <div className='flex flex-col gap-11'>
-        <Link to='/' className='flex gap-2 items-center'>
-          <img
-            src='/assets/images/logo.svg'
-            alt='logo'
-            width={45}
-            height={30}
-          />
-          <h1 className='h3-bold'>Insta<span className='text-[#7091E6]'>V</span>ibe</h1>
-        </Link>
+        <LogoComponent/>
 
         <Link to={`/profile/${user.id}`} className='flex gap-3 items-center'>
           <img
