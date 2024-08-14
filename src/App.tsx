@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import RootLayout from './_root/RootLayout'
 import { AllUsers, CreatePost, Explore, Home, PostDetails, Profile, Saved, UpdatePost, UpdateProfile } from './_root/pages'
 import AuthLayout from './_auth/AuthLayout'
@@ -6,8 +6,32 @@ import { SigninForm, SignupForm } from './_auth/forms'
 import { Toaster } from "@/components/ui/toaster"
 
 import './globals.css'
+import { useEffect } from 'react'
+import { account } from './lib/appwrite/config'
 
 const App = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      await account.get()
+        .then(() => {
+          if (location.pathname === '/sign-in' || location.pathname === '/sign-up') {
+            navigate('/')
+          }
+        }).catch((err) => {
+          console.log('No active session found:', err);
+
+          if (location.pathname !== '/sign-in') {
+            navigate('/sign-in');
+          }
+        })
+    };
+
+    checkSession();
+  }, [location, navigate]);
+
   return (
     <main className="flex h-screen">
       <Routes>
