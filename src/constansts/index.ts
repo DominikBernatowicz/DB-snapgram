@@ -48,3 +48,21 @@ export const bottombarLinks = [
     label: "Create",
   },
 ];
+
+export const mobileMenu = [
+  {
+    imgURL: "/assets/icons/people.svg",
+    route: "/people",
+    label: "All user",
+  },
+  {
+    imgURL: "/assets/icons/notification.svg",
+    route: "/notifications",
+    label: "Notifications",
+  },
+  {
+    imgURL: "/assets/icons/settings.svg",
+    route: "/settings",
+    label: "Settings",
+  }
+]

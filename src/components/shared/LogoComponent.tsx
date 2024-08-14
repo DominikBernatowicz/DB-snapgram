@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const LogoComponent = () => {
+type LogoComponentProps = {
+  func?: Dispatch<SetStateAction<boolean>>
+}
+
+const LogoComponent = ({func}: LogoComponentProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -9,7 +13,7 @@ const LogoComponent = () => {
   }, []);
 
   return (
-    <Link to='/' className='flex gap-2 items-center'>
+    <Link to='/' className='flex gap-2 items-center' onClick={() => func && func(false)}>
       <img
         src='/assets/images/logo.svg'
         alt='logo'

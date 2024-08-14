@@ -7,12 +7,15 @@ const RootLayout = () => {
   return (
     <div className='w-full flex flex-col'>
       <Topbar />
-      <div className='flex flex-1 md:max-h-screen'>
+      <div className='flex flex-1'>
         <LeftSidebar />
-        <Outlet />
+        <div className='flex-1 mt-20 mb-32 md:my-0 md:ml-[17rem]'>
+          <Outlet />
+        </div>
       </div>
-        <Bottombar />
+      <Bottombar />
     </div>
+
   )
 }
 

@@ -193,7 +193,7 @@
 
   /* Bottom bar */
   .bottom-bar {
-    @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-4 md:hidden;
+    @apply z-50 flex-between w-full fixed bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-4 md:hidden;
   }
 
   /* File uploader */
@@ -224,7 +224,7 @@
 
   /* Left sidebar */
   .leftsidebar {
-    @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-dark-2;
+    @apply hidden fixed md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-dark-2 min-h-screen;
   }
 
   .leftsidebar-link {
@@ -242,7 +242,19 @@
 
   /* Topbar */
   .topbar {
-    @apply sticky top-0 z-50 md:hidden bg-dark-2 w-full;
+    @apply fixed top-0 z-50 md:hidden bg-dark-2 w-full;
+  }
+
+  .menu-hidden {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.7s ease-in-out, opacity 0.7s ease-in-out;
+  }
+
+  .menu-visible {
+    opacity: 0.9;
+    transform: translateX(0);
+    transition: transform 0.7s ease-in-out, opacity 0.7s ease-in-out;
   }
 
   /* User card */
@@ -283,80 +295,85 @@
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
-}
 
-/* Logo */
-@keyframes wave {
-  0% {
-    transform: translateY(0);
+  /* Logo */
+  @keyframes wave {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+
+    50% {
+      transform: translateY(-10px);
+      opacity: 0.8;
+    }
+
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+
+  .logo-wave h1 {
+    animation: wave 0.8s ease-in-out forwards;
+    display: inline-block;
     opacity: 0;
   }
-  50% {
-    transform: translateY(-10px);
-    opacity: 0.8;
+
+  .logo-wave .delay-0 {
+    animation-delay: 0s;
   }
-  100% {
-    transform: translateY(0px);
-    opacity: 1;
+
+  .logo-wave .delay-1 {
+    animation-delay: 0.1s;
   }
-}
 
-.logo-wave h1 {
-  animation: wave 0.8s ease-in-out forwards;
-  display: inline-block;
-  opacity: 0;
-}
-
-.logo-wave .delay-0 {
-  animation-delay: 0s;
-}
-
-.logo-wave .delay-1 {
-  animation-delay: 0.1s;
-}
-
-.logo-wave .delay-2 {
-  animation-delay: 0.2s;
-}
-
-.logo-wave .delay-3 {
-  animation-delay: 0.3s;
-}
-
-.logo-wave .delay-4 {
-  animation-delay: 0.4s;
-}
-
-.logo-wave .delay-5 {
-  animation-delay: 0.5s;
-}
-
-.logo-wave .delay-6 {
-  animation-delay: 0.6s;
-}
-
-.logo-wave .delay-7 {
-  animation-delay: 0.7s;
-}
-
-.logo-wave .delay-8 {
-  animation-delay: 0.8s;
-}
-
-/* Animacja błysku dla litery "V" */
-@keyframes shine {
-  0% {
-    text-shadow: none;
+  .logo-wave .delay-2 {
+    animation-delay: 0.2s;
   }
-  50% {
-    text-shadow: 0 0 10px #7091E6, 0 0 20px #7091E6, 0 0 30px #7091E6;
-  }
-  100% {
-    text-shadow: none;
-  }
-}
 
-.shine {
-  animation: shine 1s ease-in-out forwards;
-  animation-delay: 1.6s; /* Dodaj opóźnienie, aby shine zadziałał po wave */
+  .logo-wave .delay-3 {
+    animation-delay: 0.3s;
+  }
+
+  .logo-wave .delay-4 {
+    animation-delay: 0.4s;
+  }
+
+  .logo-wave .delay-5 {
+    animation-delay: 0.5s;
+  }
+
+  .logo-wave .delay-6 {
+    animation-delay: 0.6s;
+  }
+
+  .logo-wave .delay-7 {
+    animation-delay: 0.7s;
+  }
+
+  .logo-wave .delay-8 {
+    animation-delay: 0.8s;
+  }
+
+  /* Animacja błysku dla litery "V" */
+  @keyframes shine {
+    0% {
+      text-shadow: none;
+    }
+
+    50% {
+      text-shadow: 0 0 10px #7091E6, 0 0 20px #7091E6, 0 0 30px #7091E6;
+    }
+
+    100% {
+      text-shadow: none;
+    }
+  }
+
+  .shine {
+    animation: shine 1s ease-in-out forwards;
+    animation-delay: 1.6s;
+    /* Dodaj opóźnienie, aby shine zadziałał po wave */
+  }
 }
