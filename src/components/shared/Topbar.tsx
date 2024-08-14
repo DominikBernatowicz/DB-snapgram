@@ -47,7 +47,7 @@ const Topbar = () => {
         </div>
       </div>
 
-      <div className={`w-full absolute bg-dark-3 opacity-90 rounded-b-3xl ${showMenu ? 'menu-visible' : 'menu-hidden'}`}>
+      <div className={`w-full absolute rounded-b-3xl ${showMenu ? 'menu-visible' : 'menu-hidden'}`}>
         <div className="flex justify-end">
           <ul className='text-right w-2/3'>
             {mobileMenu.map((link: INavLink, index: number) => {
@@ -77,7 +77,7 @@ const Topbar = () => {
 
         <div className='flex justify-center my-8'>
           <Button
-            className='opacity-90 gap-5 bg-red w-40'
+            className='gap-5 bg-red w-40'
             onClick={() => signOut()}
           >
             <img 
