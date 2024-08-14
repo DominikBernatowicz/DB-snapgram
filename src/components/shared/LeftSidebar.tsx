@@ -51,14 +51,14 @@ const LeftSidebar = () => {
             const isActive = pathname === link.route
 
             return (
-              <li key={index} className={`leftsidebar-link group ${isActive && 'bg-primary-500'}`}>
-                <NavLink to={link.route} className='flex gap-4 items-center p-4'>
+              <li key={index} className={`flex flex-row items-center leftsidebar-link group ${isActive ? 'bg-primary-500 translate-x-7' : 'translate-x-0 hover:bg-primary-600'}`}>
+                <NavLink to={link.route} className='flex gap-4 items-center p-4 w-full'>
                   <img
                     src={link.imgURL}
                     alt={link.label}
                     className={`${isActive && 'invert-white'}`}
                   />
-                  <p className='tiny-medium text-light-2'>{link.label}</p>
+                  <p className='text-base text-light-2'>{link.label}</p>
                 </NavLink>
               </li>
             )

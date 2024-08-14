@@ -1,12 +1,11 @@
 import { bottombarLinks } from '@/constansts'
-import React from 'react'
-import { Link, useLocation, useNavigation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Bottombar = () => {
   const { pathname } = useLocation()
 
   return (
-    <section className='bottom-bar h-24'>
+    <section className='bottom-bar h-28'>
       <ul className='flex w-full justify-around'>
         {bottombarLinks.map((link, index) => {
           const isActive = pathname === link.route
