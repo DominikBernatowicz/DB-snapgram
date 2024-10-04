@@ -113,6 +113,42 @@
     @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
   }
 
+  /* Auth */
+
+  @keyframes slide-in {
+    0% {
+      transform: translateX(-80%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateX(80%);
+      opacity: 0;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.5s ease forwards;
+    /* Animacja wejścia */
+  }
+
+  .animate-slide-out {
+    animation: slide-out 0.5s ease forwards;
+    /* Animacja wyjścia */
+  }
+
   /* All Users */
   .user-container {
     @apply flex flex-col flex-1 items-center overflow-scroll py-10 px-5 md:p-14 custom-scrollbar
