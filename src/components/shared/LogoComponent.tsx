@@ -5,7 +5,7 @@ type LogoComponentProps = {
   func?: Dispatch<SetStateAction<boolean>>
 }
 
-const LogoComponent = ({func}: LogoComponentProps) => {
+const LogoComponent = ({ func }: LogoComponentProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
