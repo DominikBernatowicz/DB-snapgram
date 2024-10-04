@@ -1,7 +1,6 @@
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Link, useNavigate } from "react-router-dom"
-
+import { useNavigate, useOutletContext } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { Form } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
@@ -11,12 +10,12 @@ import Loader from "@/components/shared/Loader"
 import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutatuions"
 import { useToast } from "@/components/ui/use-toast"
 import { useUserContext } from "@/context/AuthContext"
-import { useEffect } from "react"
 
 
 const SignupForm = () => {
   const navigate = useNavigate()
   const { toast } = useToast()
+  const { toggleForm } = useOutletContext();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext()
 
   const { mutateAsync: createUserAccount, isPending: isCreatingAccount } = useCreateUserAccount()
@@ -60,10 +59,14 @@ const SignupForm = () => {
     }
   }
 
+  const handleClick = () => {
+    toggleForm()
+  };
+
   return (
     <Form {...form}>
-      <div className='sm:w-420 flex-center flex-col'>
-        <div className="flex flex-center gap-2">
+      <div className={`sm:w-420 flex-center flex-col`}>
+        <div className="flex flex-center gap-2 mr-8">
           <img
             src="/assets/images/logo.svg"
             alt="logo"
@@ -73,10 +76,10 @@ const SignupForm = () => {
           <h1 className='h1-bold'>Insta<span className='text-[#7091E6]'>V</span>ibe</h1>
         </div>
 
-        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">Create a new account</h2>
+        <h2 className="h3-bold md:h2-bold pt-5">Create a new account</h2>
         <p className="text-light-3 small-medium md:base-regular mt-2">To use Snapgram, please enter your account details</p>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full mt-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 w-full mt-4">
           <FormTextField
             control={form.control}
             name='name'
@@ -110,9 +113,13 @@ const SignupForm = () => {
 
           <p className="text-small-regular text-light-2 text-center mt-2">
             Alredy have an account?
-            <Link to="/sign-in" className="text-primary-500 text-small-semibold ml-1">
+            <button
+              onClick={handleClick}
+              className="text-primary-500 text-small-semibold ml-1"
+              type="button"
+            >
               Log in
-            </Link>
+            </button>
           </p>
         </form>
       </div >
