@@ -9,11 +9,11 @@ export const sidebarLinks = [
     route: "/explore",
     label: "Explore",
   },
-  {
-    imgURL: "/assets/icons/people.svg",
-    route: "/all-users",
-    label: "People",
-  },
+  // {
+  //   imgURL: "/assets/icons/people.svg",
+  //   route: "/add-users",
+  //   label: "People",
+  // },
   {
     imgURL: "/assets/icons/bookmark.svg",
     route: "/saved",
@@ -50,11 +50,11 @@ export const bottombarLinks = [
 ];
 
 export const mobileMenu = [
-  {
-    imgURL: "/assets/icons/people.svg",
-    route: "/people",
-    label: "All user",
-  },
+  // {
+  //   imgURL: "/assets/icons/people.svg",
+  //   route: "/add-users",
+  //   label: "Add user",
+  // },
   {
     imgURL: "/assets/icons/notification.svg",
     route: "/notifications",
